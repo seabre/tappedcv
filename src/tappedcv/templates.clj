@@ -6,8 +6,6 @@
 
 (clojure.lang.RT/loadLibrary Core/NATIVE_LIBRARY_NAME)
 
-
-(def arrow (Highgui/imread (s/retrieve :arrow) 0))
 (def dollarsign (Highgui/imread (s/retrieve :dollarsign) 0))
 
 (def preferred-match-method (Imgproc/TM_CCOEFF_NORMED))
@@ -85,9 +83,3 @@
 
 (defn get-center-dollarsign [image match-method]
   (get-center image dollarsign match-method))
-
-(defn get-arrow [image match-method]
-  (let [result (match-location image arrow match-method)
-        newx (+ (.x (get result :match-point)) 20)
-        newy (+ (.y (get result :match-point)) 20)]
-     (match-result (Point. newx newy) (get result :metric))))

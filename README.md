@@ -9,7 +9,6 @@ The settings should be stored in the file `~/.tappedcv`
   :threshold 0.7
   :height-buffer 175
   :dollarsign "/home/seabre/dollarsign.png"
-  :arrow "/home/seabre/arrow.png"
   :android-screenshot-path "/sdcard/tappedcv-screenshot.png"
   :host-screenshot-path "/tmp/tappedcv-screenshot.png"
 }
