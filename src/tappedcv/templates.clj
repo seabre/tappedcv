@@ -12,9 +12,6 @@
 (def preferred-match-method (Imgproc/TM_CCOEFF_NORMED))
 (def preferred-threshold 0.7)
 
-(def max-x 160)
-(def max-y 940)
-
 ; Icons move, so increase height by this much.
 ; 200 is a good value, but you may need to tweak this.
 (def height-buffer 175)
