@@ -28,15 +28,6 @@
     (Imgproc/cvtColor img img Imgproc/COLOR_BGR2GRAY)
     img))
 
-(defn result-rows [image template]
-  (+ (- (.rows image) (.rows template)) 1))
-
-(defn result-cols [image template]
-  (+ (- (.cols image) (.cols template)) 1))
-
-(defn result-matrix [rows cols]
-  (Mat. rows cols CvType/CV_32FC1))
-
 (defn match-result [matchpoint metric]
   {:match-point matchpoint :metric metric})
 
