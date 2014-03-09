@@ -1,14 +1,22 @@
 # tappedcv
 
-A Clojure library designed to ... well, that part is up to you.
+## Example Settings
 
-## Usage
+The settings should be stored in the file `~/.tappedcv`
 
-FIXME
+```clojure
+{
+  :threshold 0.7
+  :height-buffer 175
+  :dollarsign "/home/seabre/dollarsign.png"
+  :arrow "/home/seabre/arrow.png"
+  :android-screenshot-path "/sdcard/tappedcv-screenshot.png"
+  :host-screenshot-path "/tmp/tappedcv-screenshot.png"
+}
+```
 
-## License
 
-Copyright © 2014 FIXME
+Copyright © 2014 Sean Brewer
 
 Distributed under the Eclipse Public License either version 1.0 or (at
 your option) any later version.
