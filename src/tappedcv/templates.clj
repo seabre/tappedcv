@@ -62,12 +62,12 @@
 (defn vec-within-threshold [v threshold]
   (flatten (pmap (fn [i] (filter #(>= (get % :metric) threshold) i)) v)))
 
-(defn find-results [image template match-method]
+(defn match-locations [image template match-method]
   (let [resultmatrix (match-template image template match-method)]
     (vec-within-threshold (mat-as-vec resultmatrix template) preferred-threshold)))
 
-(defn find-dollarsign-results [image match-method]
-  (find-results image dollarsign match-method))
+(defn find-dollarsign-locations [image match-method]
+  (match-locations image dollarsign match-method))
 
 (defn match-location [image template match-method]
   (let [result (match-template image template match-method)

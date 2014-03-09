@@ -29,7 +29,7 @@
 (defn -main[] 
   (loop []
     (adb/save-screenshot screenshot-path)
-    (let [results (t/find-dollarsign-results (t/screenshot screenshot-path) t/preferred-match-method)
+    (let [results (t/find-dollarsign-locations (t/screenshot screenshot-path) t/preferred-match-method)
           arrowresults (t/get-arrow (t/screenshot screenshot-path) t/preferred-match-method)] 
       (tap-arrow-if-detected arrowresults)
       (tap-dollarsigns-if-detected results)
