@@ -56,3 +56,25 @@
     (reduce #(and %1 %2) 
       (map #(>= (get % :metric) t/preferred-threshold) 
            (t/vec-within-threshold (t/mat-as-vec result-matrix template) t/preferred-threshold))) => true))
+
+(facts "result-within-region"
+  (fact "it returns false if within minimum x"
+    (t/result-within-region (t/match-result (Point. 2 2) 0.1) 10 200) => false)
+  (fact "it returns true if greater than minimum x"
+    (t/result-within-region (t/match-result (Point. 11 2) 0.1) 10 200) => true)
+  (fact "it returns false if equal to than minimum x"
+    (t/result-within-region (t/match-result (Point. 10 2) 0.1) 10 200) => false)
+  (fact "it returns false if within maximum y"
+    (t/result-within-region (t/match-result (Point. 10 201) 0.1) 10 200) => false)
+  (fact "it returns true if less than maximum y"
+    (t/result-within-region (t/match-result (Point. 11 199) 0.1) 10 200) => true)
+  (fact "it returns false if equal to than maximum y"
+    (t/result-within-region (t/match-result (Point. 11 200) 0.1) 10 200) => false)
+  (fact "it returns false if point is within minimum x and within maximum y"
+    (t/result-within-region (t/match-result (Point. 2 201) 0.1) 10 200) => false)
+  (fact "it returns true if point is not within minimum x and not within maximum y"
+    (t/result-within-region (t/match-result (Point. 11 199) 0.1) 10 200) => true))
+
+(facts "results-within-region"
+  (fact "returns all results within region"
+    (count (t/results-within-region [(t/match-result (Point. 10 199) 0.1) (t/match-result (Point. 11 199) 0.1)] 10 200)) => 1))

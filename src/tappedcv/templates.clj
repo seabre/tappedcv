@@ -52,6 +52,13 @@
 (defn vec-within-threshold [v threshold]
   (flatten (pmap (fn [i] (filter #(>= (get % :metric) threshold) i)) v)))
 
+(defn result-within-region [r minx maxy]
+  (let [point (get r :match-point)]
+    (and (> (.x point) minx) (< (.y point) maxy))))
+
+(defn results-within-region [v minx maxy]
+  (filter #(result-within-region % minx maxy) v))
+
 (defn match-locations [image template match-method]
   (let [resultmatrix (match-template image template match-method)]
     (vec-within-threshold (mat-as-vec resultmatrix template) preferred-threshold)))
