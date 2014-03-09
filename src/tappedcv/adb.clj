@@ -1,8 +1,9 @@
 (ns tappedcv.adb
   (:require [me.raynes.conch :refer [programs with-programs let-programs]]
-            [clojure.string :as string]))
+            [clojure.string :as string]
+            [tappedcv.settings :as s]))
 
-(def android-screenshot-path "/sdcard/tappedcv-screenshot.png")
+(def android-screenshot-path (s/retrieve :android-screenshot-path))
 
 (defn tap [x y]
   (let [intx (str (int x))

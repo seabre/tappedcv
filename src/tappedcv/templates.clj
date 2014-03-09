@@ -1,20 +1,21 @@
 (ns tappedcv.templates
  (:import [org.opencv.core Mat Size CvType Core Point]
           [org.opencv.highgui Highgui]
-          [org.opencv.imgproc Imgproc]))
+          [org.opencv.imgproc Imgproc])
+  (:require [tappedcv.settings :as s]))
 
 (clojure.lang.RT/loadLibrary Core/NATIVE_LIBRARY_NAME)
 
 
-(def arrow (Highgui/imread "/home/seabre/arrow.png" 0))
-(def dollarsign (Highgui/imread "/home/seabre/dollarsign.png" 0))
+(def arrow (Highgui/imread (s/retrieve :arrow) 0))
+(def dollarsign (Highgui/imread (s/retrieve :dollarsign) 0))
 
 (def preferred-match-method (Imgproc/TM_CCOEFF_NORMED))
-(def preferred-threshold 0.7)
+(def preferred-threshold (s/retrieve :threshold))
 
 ; Icons move, so increase height by this much.
 ; 200 is a good value, but you may need to tweak this.
-(def height-buffer 175)
+(def height-buffer (s/retrieve :height-buffer))
 
 (defn rotate-image-counterclockwise [image]
   (let [imageresult image]

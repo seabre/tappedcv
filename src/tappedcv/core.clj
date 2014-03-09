@@ -1,9 +1,10 @@
 (ns tappedcv.core
   (:require [tappedcv.adb :as adb]
-            [tappedcv.templates :as t])
+            [tappedcv.templates :as t]
+            [tappedcv.settings :as s])
   (:gen-class))
 
-(def screenshot-path "/tmp/tappedcv-screenshot.png")
+(def screenshot-path (s/retrieve :host-screenshot-path))
 
 (defn tap-arrow-if-detected [results]
   (let [foundpoint (get results :match-point)]
