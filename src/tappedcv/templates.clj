@@ -41,15 +41,22 @@
     (Core/pow result 5 result)
     result))
 
+(defn row-to-results [resultmatrix template row]
+  (let [resultrow (.row resultmatrix row)
+       resultrowarr (float-array (.cols resultrow))]
+    (.get resultrow 0 0 resultrowarr)
+    (map-indexed (fn [i j] (match-result (Point. (+ i (/ (.cols template) 2)) (+ row (/ (.rows template) 2) height-buffer)) j)) (vec resultrowarr))))
+
+(defn mat-as-vec [resultmatrix template]
+  (pmap (fn [i] (row-to-results resultmatrix template i)) (range 0 (.rows resultmatrix))))
+
+(defn vec-within-threshold [v]
+  (flatten (pmap (fn [i] (filter #(>= (get % :metric) 0.7) i)) v)))
+
 ; Experimental code to find all results and filter.
 (defn find-results [image template match-method]
-  (let [resultmatrix (match-template image template match-method)
-        rows (.rows image)
-        columns (.cols image)]
-        ;results (for [x (range rows) y (range columns)] (match-result (Point. (+ x (/ (.cols template) 2)) (+ y (/ (.rows template) 2) height-buffer)) (first (seq (.get resultmatrix x y)))))]
-    ;(filter #(>= (get % :metric) 0.8) results)
-    (resultmatrix)
-    ))
+  (let [resultmatrix (match-template image template match-method)]
+    (vec-within-threshold (mat-as-vec resultmatrix template))))
 
 ; Experimental code to find all results and filter.
 (defn find-dollarsign-results [image match-method]

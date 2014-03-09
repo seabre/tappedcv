@@ -19,12 +19,18 @@
         (println "Found dollar sign: " results)
         (adb/tap (.x foundpoint) (.y foundpoint))))))
 
+(defn tap-dollarsigns-if-detected [results]
+  (doseq [r results]
+    (let [foundpoint (get r :match-point)]
+      (println "Found dollar sign: " r)
+      (adb/tap (.x foundpoint) (.y foundpoint)))))
+
 
 (defn -main[] 
   (loop []
     (adb/save-screenshot screenshot-path)
-    (let [results (t/get-center-dollarsign (t/screenshot screenshot-path) t/preferred-match-method)
+    (let [results (t/find-dollarsign-results (t/screenshot screenshot-path) t/preferred-match-method)
           arrowresults (t/get-arrow (t/screenshot screenshot-path) t/preferred-match-method)] 
       (tap-arrow-if-detected arrowresults)
-      (tap-dollarsign-if-detected results)
+      (tap-dollarsigns-if-detected results)
       (recur))))
