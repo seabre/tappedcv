@@ -10,6 +10,7 @@
 (def dollarsign (Highgui/imread "/home/seabre/dollarsign.png" 0))
 
 (def preferred-match-method (Imgproc/TM_CCOEFF_NORMED))
+(def preferred-threshold 0.7)
 
 (def max-x 160)
 (def max-y 940)
@@ -53,12 +54,12 @@
 (defn mat-as-vec [resultmatrix template]
   (pmap (fn [i] (row-to-results resultmatrix template i)) (range 0 (.rows resultmatrix))))
 
-(defn vec-within-threshold [v]
-  (flatten (pmap (fn [i] (filter #(>= (get % :metric) 0.7) i)) v)))
+(defn vec-within-threshold [v threshold]
+  (flatten (pmap (fn [i] (filter #(>= (get % :metric) threshold) i)) v)))
 
 (defn find-results [image template match-method]
   (let [resultmatrix (match-template image template match-method)]
-    (vec-within-threshold (mat-as-vec resultmatrix template))))
+    (vec-within-threshold (mat-as-vec resultmatrix template) preferred-threshold)))
 
 (defn find-dollarsign-results [image match-method]
   (find-results image dollarsign match-method))

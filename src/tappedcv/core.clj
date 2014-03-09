@@ -7,14 +7,14 @@
 
 (defn tap-arrow-if-detected [results]
   (let [foundpoint (get results :match-point)]
-    (if (>= (get results :metric) 0.7)
+    (if (>= (get results :metric) t/preferred-threshold)
       (do
         (println "Found arrow: " results)
         (adb/tap (.x foundpoint) (.y foundpoint))))))
 
 (defn tap-dollarsign-if-detected [results]
   (let [foundpoint (get results :match-point)]
-    (if (>= (get results :metric) 0.7)
+    (if (>= (get results :metric) t/preferred-threshold)
       (do
         (println "Found dollar sign: " results)
         (adb/tap (.x foundpoint) (.y foundpoint))))))
