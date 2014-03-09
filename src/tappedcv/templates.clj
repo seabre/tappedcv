@@ -5,7 +5,6 @@
 
 (clojure.lang.RT/loadLibrary Core/NATIVE_LIBRARY_NAME)
 
-;(def dollarsign (Highgui/imread "resources/images/dollarsign.png"))
 (def arrow (Highgui/imread "/home/seabre/arrow.png" 0))
 (def dollarsign (Highgui/imread "/home/seabre/dollarsign.png" 0))
 
