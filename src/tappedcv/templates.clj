@@ -5,6 +5,7 @@
 
 (clojure.lang.RT/loadLibrary Core/NATIVE_LIBRARY_NAME)
 
+
 (def arrow (Highgui/imread "/home/seabre/arrow.png" 0))
 (def dollarsign (Highgui/imread "/home/seabre/dollarsign.png" 0))
 
@@ -15,8 +16,16 @@
 ; 200 is a good value, but you may need to tweak this.
 (def height-buffer 175)
 
+(defn rotate-image-counterclockwise [image]
+  (let [imageresult image]
+    (Core/transpose image imageresult)
+    (Core/flip imageresult, imageresult, 0)
+    imageresult))
+
 (defn screenshot [imgpath] 
-  (let [img (Highgui/imread imgpath)]
+  ; For some reason, we always get back the screenshot from adb
+  ; in portrait mode. We need to rotate the image counter-clockwise
+  (let [img (rotate-image-counterclockwise (Highgui/imread imgpath))]
     (Imgproc/cvtColor img img Imgproc/COLOR_BGR2GRAY)
     img))
 

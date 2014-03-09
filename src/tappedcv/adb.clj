@@ -11,8 +11,6 @@
     (adb "shell" "input" "tap" intx inty))))
 
 (defn save-screenshot [filepath]
-  (with-programs [adb mogrify]
+  (with-programs [adb]
     (adb "shell" "/system/bin/screencap" "-p" android-screenshot-path)
-    (adb "pull" android-screenshot-path filepath)
-    ; Probably should make this happen in OpenCV instead.
-    (mogrify "-rotate" "270" filepath)))
+    (adb "pull" android-screenshot-path filepath)))
