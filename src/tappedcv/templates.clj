@@ -36,7 +36,7 @@
 
 (defn match-template [image template match-method]
   (let [result image]
-    (Imgproc/matchTemplate image template result  match-method)
+    (Imgproc/matchTemplate image template result match-method)
     (Core/pow result 5 result)
     result))
 
