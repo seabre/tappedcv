@@ -9,5 +9,5 @@
                  [me.raynes/conch "0.5.0"]]
   :main ^:skip-aot tappedcv.core
   ;:global-vars {*warn-on-reflection* true}
-  :profiles {:uberjar {:aot :all}}
+  :profiles {:uberjar {:aot :all} :dev {:dependencies [[midje "1.6.2"]]}}
   :injections [(clojure.lang.RT/loadLibrary org.opencv.core.Core/NATIVE_LIBRARY_NAME)])
