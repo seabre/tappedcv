@@ -35,6 +35,9 @@
 (defn match-result [matchpoint metric]
   {:match-point matchpoint :metric metric})
 
+(defn match-point-center [x y template heightbuffer]
+  (Point. (+ x (/ (.cols template) 2)) (+ y (/ (.rows template) 2) heightbuffer)))
+
 (defn match-template [image template match-method]
   (let [result image]
     (Imgproc/matchTemplate image template result  match-method)
@@ -45,7 +48,7 @@
   (let [resultrow (.row resultmatrix row)
        resultrowarr (float-array (.cols resultrow))]
     (.get resultrow 0 0 resultrowarr)
-    (map-indexed (fn [i j] (match-result (Point. (+ i (/ (.cols template) 2)) (+ row (/ (.rows template) 2) height-buffer)) j)) (vec resultrowarr))))
+    (map-indexed (fn [i j] (match-result (match-point-center i row template height-buffer) j)) (vec resultrowarr))))
 
 (defn mat-as-vec [resultmatrix template]
   (pmap (fn [i] (row-to-results resultmatrix template i)) (range 0 (.rows resultmatrix))))
@@ -53,15 +56,12 @@
 (defn vec-within-threshold [v]
   (flatten (pmap (fn [i] (filter #(>= (get % :metric) 0.7) i)) v)))
 
-; Experimental code to find all results and filter.
 (defn find-results [image template match-method]
   (let [resultmatrix (match-template image template match-method)]
     (vec-within-threshold (mat-as-vec resultmatrix template))))
 
-; Experimental code to find all results and filter.
 (defn find-dollarsign-results [image match-method]
   (find-results image dollarsign match-method))
-
 
 (defn match-location [image template match-method]
   (let [result (match-template image template match-method)
@@ -74,7 +74,7 @@
   (let [matchloc (match-location image template match-method)
         point (get matchloc :match-point)
         metric (get matchloc :metric)]
-    (match-result (Point. (+ (.x point) (/ (.cols template) 2)) (+ (.y point) (/ (.rows template) 2) height-buffer)) metric)))
+    (match-result (match-point-center (.x point) (.y point) template height-buffer) metric)))
 
 (defn get-center-dollarsign [image match-method]
   (get-center image dollarsign match-method))
