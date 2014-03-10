@@ -23,7 +23,7 @@ before_script:
   - make -j8
   - sudo make -j8 install
   - cd ../..
-  - mkdir native/linux/x86_64
+  - mkdir -p native/linux/x86_64
   - cp opencv/build/lib/libopencv_java248.so native/linux/x86_64/libopencv_java248.so
   - cp opencv/build/bin/opencv-248.jar .
   - jar -cMf opencv-native-248.jar native
