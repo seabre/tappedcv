@@ -11,6 +11,8 @@ The settings should be stored in the file `~/.tappedcv`
   :dollarsign "/home/seabre/dollarsign.png"
   :android-screenshot-path "/sdcard/tappedcv-screenshot.png"
   :host-screenshot-path "/tmp/tappedcv-screenshot.png"
+  :min-x 0
+  :max-y 0
 }
 ```
 
