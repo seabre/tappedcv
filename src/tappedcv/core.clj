@@ -17,5 +17,5 @@
   (loop []
     (adb/save-screenshot screenshot-path)
     (let [results (t/find-dollarsign-locations (t/screenshot screenshot-path) t/preferred-match-method)]
-      (tap-dollarsigns-if-detected results)
+      (tap-dollarsigns-if-detected (t/results-within-region results (s/retrieve :min-x) (s/retrieve :max-y)))
       (recur))))
