@@ -29,3 +29,4 @@ before_script:
   - jar -cMf opencv-native-248.jar native
   - lein2 localrepo install opencv-248.jar opencv/opencv 2.4.8
   - lein2 localrepo install opencv-native-248.jar opencv/opencv-native 2.4.8
+  - cp .tappedcv.examplesettings ~/.tappedcv
