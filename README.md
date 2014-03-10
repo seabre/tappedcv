@@ -1,6 +1,7 @@
 # tappedcv
 
-[![Build Status](https://travis-ci.org/seabre/tappedcv.png?branch=master)](https://travis-ci.org/seabre/tappedcv)
+Master: [![Build Status](https://travis-ci.org/seabre/tappedcv.png?branch=master)](https://travis-ci.org/seabre/tappedcv)
+Dev: [![Build Status](https://travis-ci.org/seabre/tappedcv.png?branch=dev)](https://travis-ci.org/seabre/tappedcv)
 
 ## Example Settings
 
