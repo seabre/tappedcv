@@ -10,4 +10,5 @@
   :main ^:skip-aot tappedcv.core
   ;:global-vars {*warn-on-reflection* true}
   :profiles {:uberjar {:aot :all} :dev {:dependencies [[midje "1.6.2"]] :resource-paths ["test/testresources"]}}
+  :plugins [[lein-localrepo "0.5.3"]]
   :injections [(clojure.lang.RT/loadLibrary org.opencv.core.Core/NATIVE_LIBRARY_NAME)])
