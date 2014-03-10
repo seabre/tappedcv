@@ -1,5 +1,7 @@
 # tappedcv
 
+[![Build Status](https://travis-ci.org/seabre/tappedcv.png?branch=master)](https://travis-ci.org/seabre/tappedcv)
+
 ## Example Settings
 
 The settings should be stored in the file `~/.tappedcv`
